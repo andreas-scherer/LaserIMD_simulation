@@ -1,0 +1,30 @@
+B:    1.2697
+g_d: 2.0076 0 0 0 2.0076 0 0 0 2.0096
+Temperature: 100 K
+g_t: 2.00432       0       0      0  2.00432       0      0       0 2.00432
+ZFS, D: 2093 
+ZFS, E: -593
+Population: 0.38 0.62 0
+T yield: 1
+Distance: 2.5 nm
+
+omega: 34 GHz
+
+Knots doublet: 50
+Symmetrie doublet: Ci
+Knots triplet: 50
+Symmetrie triplet: Ci
+Knots dipolar: 50
+Symmetrie dipolar: Ci
+
+
+FID time: 500 ns
+Flip period: 48 ns
+Delta t: 1 ns
+Echo maximum: 1042 ns
+Integration window: 80 ns
+
+
+B start: 1.09
+B end: 1.35
+B step: 0.00065163

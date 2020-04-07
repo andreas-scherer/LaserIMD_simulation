@@ -1,0 +1,21 @@
+B: 1.23
+g_d: 2.00906       0       0    0 2.00687       0      0       0   2.003
+HFI: 12.5 0 0 0 12.5 0 0 0 97.5 
+omega: 34 GHz
+Temperature: 400 K
+
+
+Knots: 50
+Symmetrie: Ci
+
+
+FID time: 500 ns
+Flip period: 48 ns
+Delta t: 1 ns
+Echo maximum: 1042 ns
+Integration window: 200 ns
+
+
+B start: 1.195
+B end: 1.225
+B step: 0.00010033   
