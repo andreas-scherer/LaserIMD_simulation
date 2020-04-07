@@ -1,0 +1,6 @@
+Every Simulation can be run by typing the following command in the Windows command line:
+Program Source_file save_file folder_to_grid
+
+Example:
+LaserIMD LaserIMD//LaserIMD_Doublet_att12.txt LaserIMD//LaserIMD_Doublet_att12_result.txt grid
+for a LaserIMD simulation with att12

@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
 	Spin_System_Doublet spin_pulse;
 		
 	auto temp = boost::make_tuple(boost::ref(spin_time), boost::ref(spin_pulse), boost::ref(t_step), boost::ref(taus), boost::ref(t));
-	temp = load_parameters_doublet(argv[1]);
+	temp = load_parameters_Doublet(argv[1]);
 
 
 	auto temp2 = boost::make_tuple(boost::ref(spin_time_2), boost::ref(spin_pulse_2), boost::ref(t_step), boost::ref(taus), boost::ref(t));

@@ -23,7 +23,7 @@ namespace fs = std::experimental::filesystem;
 
 boost::tuple<double, std::vector<double>, std::vector<double>> load_exp_par(std::string);
 
-boost::tuple<Spin_System_Doublet, Spin_System_Doublet, double, std::vector<double>, std::vector<double>> load_parameters_doublet(std::string file) {
+boost::tuple<Spin_System_Doublet, Spin_System_Doublet, double, std::vector<double>, std::vector<double>> load_parameters_Doublet(std::string file) {
 
 	std::ifstream fid(file);
 
