@@ -28,14 +28,19 @@
 namespace fs = std::experimental::filesystem;
 
 template<class P_list>
-P_list create_8_ns_P_list(P_list const & P_list_1ns) {
+P_list create_8_ns_P_list(P_list const & P_list_2ns) {
+
+	/*
+	this function creates propagators that capture an 8ns step from propagators that capture a 2ns step
+	*/
 
 	//2ns
-	P_list temp(P_list_1ns); 
+	P_list temp(P_list_2ns); 
 	//4ns
 	temp.multiply(temp,true);
 	//8ns
 	temp.multiply(temp, true);
+
 
 
 	return temp;
@@ -45,6 +50,9 @@ P_list create_8_ns_P_list(P_list const & P_list_1ns) {
 template<class P_list>
 P_list repeat_P_list(P_list const & P_list_step,double t_end) {
 
+	/*
+	this function repeats the propagators in P_list_step upto a time step t_end is captured
+	*/
 
 	P_list temp(P_list_step);
 	temp.reset();
@@ -60,6 +68,11 @@ P_list repeat_P_list(P_list const & P_list_step,double t_end) {
 
 template<class P_list>
 P_list reverse_P_list(P_list const & P_list_start, P_list const & P_list_step, double t_end) {
+
+	/*
+	this function calculates propagators that capture a time step of the length t_end by reverting the
+	propgatros in P_list_start with the propagators in P_list_step
+	*/
 
 
 	P_list temp(P_list_start);
@@ -89,9 +102,6 @@ int main(int argc, char *argv[]) {
 	}
 
 
-	//std::vector<double> taus = arange(-504e-9, 4500e-9, t_tau); // linspace(-500e-9, 4000e-9, 500);
-
-	
 
 	double t_step;
 	std::vector<double> taus;
@@ -104,7 +114,7 @@ int main(int argc, char *argv[]) {
 	Spin_System_Doublet spin_pulse;
 		
 	auto temp = boost::make_tuple(boost::ref(spin_time), boost::ref(spin_pulse), boost::ref(t_step), boost::ref(taus), boost::ref(t));
-	temp = load_parameters_Doublet(argv[1]);
+	temp = load_parameters_doublet(argv[1]);
 
 
 	auto temp2 = boost::make_tuple(boost::ref(spin_time_2), boost::ref(spin_pulse_2), boost::ref(t_step), boost::ref(taus), boost::ref(t));
@@ -142,14 +152,15 @@ int main(int argc, char *argv[]) {
 	auto temp_dipolar = boost::make_tuple(boost::ref(phi_dipolar), boost::ref(theta_dipolar), boost::ref(weights_dipolar));
 	temp_dipolar = grid(argv[3], spin_time_2.symmetrie_dipolar, spin_time_2.knots_dipolar);
 
-		
+	//the propagators for the Doublet system (before Laser excitation) are simulated in advance, they are updated later on capture the shift of the laser flash
+
+
 	P_list_one_rot<Spin_System_Doublet> P_list_time_2ns(spin_time, t_step, theta_doublet, phi_doublet); P_list_time_2ns.create_P_list();
 	P_list_one_rot<Spin_System_Doublet> P_list_time_8ns(create_8_ns_P_list(P_list_time_2ns));
 	P_list_one_rot<Spin_System_Doublet> P_list_time_fid1(repeat_P_list(P_list_time_8ns, t2 - t1)); 
 	P_list_one_rot<Spin_System_Doublet> P_list_time_fid2(repeat_P_list(P_list_time_8ns, t4 - t3));
 
 
-		
 	P_list_one_rot<Spin_System_Doublet> P_list_pulse_2ns(spin_pulse, t_step, theta_doublet, phi_doublet); P_list_pulse_2ns.create_P_list();
 	P_list_one_rot<Spin_System_Doublet> P_list_pulse_8ns(create_8_ns_P_list(P_list_pulse_2ns)); 
 	P_list_one_rot<Spin_System_Doublet>  P_list_pulse_pi_2(repeat_P_list(P_list_pulse_2ns, t_pi_2)); 
@@ -298,6 +309,7 @@ int main(int argc, char *argv[]) {
 	bool first_part=false;
 
 		
+	//the propagators for the Doublet_Triplet system (after Laser excitation) are simulated in advance, they are updated later on capture the shift of the laser flash
 
 
 	Spin_System_Doublet_Triplet::operator_type rho = Spin_System_Doublet_Triplet::operator_type::Zero();
@@ -318,6 +330,8 @@ int main(int argc, char *argv[]) {
 	for (int q = 0; q < taus.size();++q) {
 		double tau = taus[q];
 		log_stream.save_x(tau);
+
+		//show current tau on screen
 		std::cout << tau*1e9 << "\n";
 				
 		for (int i = 0; i < phi_doublet.size(); ++i) {

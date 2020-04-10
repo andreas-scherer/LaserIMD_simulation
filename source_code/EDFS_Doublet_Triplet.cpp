@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
 
 			Spin_System_Doublet_Triplet::operator_type rho_start = spin_time.get_rho_equ(angles[0], angles[1], angles[2]);
 			Spin_System_Doublet_Triplet::operator_type rho;
-
+			
 			rho = simulate(spin_pulse, t0, t1, angles, rho_start, Log_trace_none{});
 			rho = simulate(spin_time, t1, t2, angles, rho, Log_trace_none{});
 			rho = simulate(spin_pulse, t2, t3, angles, rho, Log_trace_none{});

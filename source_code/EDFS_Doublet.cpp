@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 	Spin_System_Doublet spin_pulse;
 	std::vector<double> t;
 	auto temp = boost::make_tuple(boost::ref(spin_time), boost::ref(spin_pulse), boost::ref(t_step), boost::ref(B), boost::ref(t));
-	temp=load_parameters_Doublet(argv[1]);
+	temp=load_parameters_doublet(argv[1]);
 
 
 
